@@ -26,8 +26,8 @@ enum SystemButtonType {
 final class LuminaButton: UIButton {
     private var squareSystemButtonWidth = 40
     private var squareSystemButtonHeight = 40
-    private var cancelButtonWidth = 70
-    private var cancelButtonHeight = 70
+    private var cancelButtonWidth = 40
+    private var cancelButtonHeight = 40
     private var shutterButtonDimension = 70
     private var style: SystemButtonType?
     private var border: UIView?

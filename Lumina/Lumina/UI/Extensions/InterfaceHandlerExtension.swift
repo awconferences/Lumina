@@ -33,9 +33,12 @@ extension LuminaViewController {
         self.view.addSubview(self.switchButton)
         self.view.addSubview(self.torchButton)
         self.view.addSubview(self.textPromptView)
+        self.view.addSubview(self.overlayView)
         self.view.addGestureRecognizer(self.zoomRecognizer)
         self.view.addGestureRecognizer(self.focusRecognizer)
         enableUI(valid: false)
+
+        self.view.bringSubviewToFront(self.overlayView)
     }
 
     func enableUI(valid: Bool) {

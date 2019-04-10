@@ -114,6 +114,21 @@ open class LuminaViewController: UIViewController {
         return promptView
     }
 
+    private var _overlayView: UIImageView?
+    var overlayView: UIImageView {
+      let overlayImage =  UIImage(named: "cameraOverlay", in: Bundle(for: LuminaViewController.self), compatibleWith: nil)
+      overlayImage?.withRenderingMode(.alwaysTemplate)
+
+      let overlayView = UIImageView(image: overlayImage)
+      overlayView.tintColor = UIColor.white
+      overlayView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.view.bounds.width, height: self.view.bounds.height - 80))
+      overlayView.contentMode = .scaleAspectFit
+      overlayView.alpha = 0.4
+      overlayView.isHidden = !(camera?.hasOverlay ?? true)
+      _overlayView = overlayView
+      return overlayView
+    }
+
     var isUpdating = false
 
     /// The delegate for streaming output from Lumina
@@ -220,6 +235,10 @@ open class LuminaViewController: UIViewController {
         torchButton.isHidden = !visible
     }
 
+    public func setOverlay(visible: Bool) {
+      overlayView.isHidden = !visible
+    }
+
     public func pauseCamera() {
         self.camera?.stop()
     }
@@ -299,6 +318,12 @@ open class LuminaViewController: UIViewController {
             Log.verbose("Attempting to set depth data streaming mode to \(streamDepthData)")
             self.camera?.streamDepthData = streamDepthData
         }
+    }
+
+    open var hasOverlay: Bool = false {
+      didSet {
+        self.camera?.hasOverlay = hasOverlay
+      }
     }
 
     /// Set this to apply a level of logging to Lumina, to track activity within the framework

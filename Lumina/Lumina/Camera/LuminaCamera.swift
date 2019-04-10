@@ -165,6 +165,8 @@ final class LuminaCamera: NSObject {
 
     var recognizer: AnyObject?
 
+    var hasOverlay: Bool = false
+
     private var _streamingModels: [(AnyObject, String)]?
     @available(iOS 11.0, *)
     var streamingModels: [LuminaModel]? {

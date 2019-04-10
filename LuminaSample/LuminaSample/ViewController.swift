@@ -59,6 +59,7 @@ extension ViewController { //MARK: IBActions
         camera.captureDepthData = self.capturesDepthDataSwitch.isOn
         camera.streamDepthData = self.streamsDepthDataSwitch.isOn
         camera.resolution = selectedResolution
+        camera.hasOverlay = true
         camera.maxZoomScale = (self.maxZoomScaleLabel.text! as NSString).floatValue
         camera.frameRate = Int(self.frameRateLabel.text!) ?? 30
         if #available(iOS 11.0, *), self.useCoreMLModelSwitch.isOn {

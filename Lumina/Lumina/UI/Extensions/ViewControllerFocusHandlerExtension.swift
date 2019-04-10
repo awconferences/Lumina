@@ -30,7 +30,10 @@ extension LuminaViewController {
     }
 
     private func showFocusView(at point: CGPoint) {
-        let focusView: UIImageView = UIImageView(image: UIImage(named: "cameraFocus", in: Bundle(for: LuminaViewController.self), compatibleWith: nil))
+        let focusImage = UIImage(named: "cameraFocus", in: Bundle(for: LuminaViewController.self), compatibleWith: nil)
+        let focusView: UIImageView = UIImageView(image: focusImage)
+        focusImage?.withRenderingMode(.alwaysTemplate)
+        focusView.tintColor = UIColor.white
         focusView.contentMode = .scaleAspectFit
         focusView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         focusView.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
