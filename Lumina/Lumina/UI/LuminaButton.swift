@@ -27,7 +27,7 @@ final class LuminaButton: UIButton {
     private var squareSystemButtonWidth = 40
     private var squareSystemButtonHeight = 40
     private var cancelButtonWidth = 70
-    private var cancelButtonHeight = 30
+    private var cancelButtonHeight = 70
     private var shutterButtonDimension = 70
     private var style: SystemButtonType?
     private var border: UIView?
@@ -37,6 +37,7 @@ final class LuminaButton: UIButton {
             return _image
         }
         set {
+            newValue?.withRenderingMode(.alwaysTemplate)
             self.setImage(newValue, for: UIControl.State.normal)
             _image = newValue
         }
@@ -67,6 +68,7 @@ final class LuminaButton: UIButton {
         super.init(frame: CGRect.zero)
         self.style = systemStyle
         self.backgroundColor = UIColor.clear
+        self.tintColor = UIColor.white
         if let titleLabel = self.titleLabel {
             titleLabel.textColor = UIColor.white
             titleLabel.font = UIFont.systemFont(ofSize: 20)
@@ -81,12 +83,9 @@ final class LuminaButton: UIButton {
             self.frame = CGRect(origin: CGPoint(x: UIScreen.main.bounds.maxX - 50, y: 10), size: CGSize(width: self.squareSystemButtonWidth, height: self.squareSystemButtonHeight))
             addButtonShadowEffects()
         case .cancel:
-            self.text = "X"
+            self.image = UIImage(named: "cameraCancel", in: Bundle(for: LuminaViewController.self), compatibleWith: nil)
             self.frame = CGRect(origin: CGPoint(x: 10, y: UIScreen.main.bounds.maxY - 50), size: CGSize(width: self.cancelButtonWidth, height: self.cancelButtonHeight))
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .light)
-            self.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 0)
-            self.titleLabel?.layer.shadowOpacity = 1
-            self.titleLabel?.layer.shadowRadius = 6
+            addButtonShadowEffects()
         case .shutter:
             self.backgroundColor = UIColor.normalState
             var minY = UIScreen.main.bounds.maxY
